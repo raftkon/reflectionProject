@@ -1,36 +1,40 @@
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 public class Test {
     public static void main(String[] args) {
-        try {
-            List<String> strArray = IOScript.readFile(args[0]);
-            List<Class<?>> classArray = UtilFunctions.mapStringArrToClassArr(strArray);
-            // * 1a
-            Map<String, List<String>> declaredFields = ReflectionScript.getDeclaredFieldsFromClassArray(classArray);
-            // * 1b
-            Map<String, List<String>> allFields = ReflectionScript.getAllFieldsFromClassArray(classArray);
-            // * 2a
-            Map<String, List<String>> declaredMethods = ReflectionScript.getDeclaredMethodsFromClassArray(classArray);
-            // * 2b
-            Map<String, List<String>> allMethods = ReflectionScript.getAllMethodsFromClassArray(classArray);
-            // * 4
-            Map<String, List<String>> superTypes = ReflectionScript.getAllSuperTypes(classArray);
+        if (args.length == 3) {
 
-            // UtilFunctions.iterateUsingEntrySet(declaredFields, "declared Fields");
-            // UtilFunctions.iterateUsingEntrySet(allFields, "All fields");
-            // UtilFunctions.iterateUsingEntrySet(declaredMethods, "declared Methods");
-            // UtilFunctions.iterateUsingEntrySet(allMethods, "All Methods");
-            UtilFunctions.iterateUsingEntrySet(superTypes, "Super Types");
-            System.out.println("----------------------------");
-            for (Map.Entry<String, List<String>> entry : superTypes.entrySet()) {
-                System.out.println(entry.getValue().stream().reduce("", (total, word) -> word.toUpperCase()));
+            try {
+                List<String> strArray = IOScript.readFile(args[0]);
+                List<Class<?>> classArray = UtilFunctions.mapStringArrToClassArr(strArray);
+                // * 1a
+                Map<String, List<String>> declaredFields = ReflectionScript.getDeclaredFieldsArr(classArray);
+                // * 1b
+                Map<String, List<String>> allFields = ReflectionScript.getAllFieldsArr(classArray);
+                // * 2a
+                Map<String, List<String>> declaredMethods = ReflectionScript.getDeclaredMethodsArr(classArray);
+                // * 2b
+                Map<String, List<String>> allMethods = ReflectionScript.getAllMethodsArr(classArray);
+                // * 4
+                Map<String, Set<String>> superTypes = ReflectionScript.getAllSuperTypes(classArray);
+                // * 3
+                Map<String, Integer> subTypes = ReflectionScript.getAllSubtypes(superTypes);
+
+                // UtilFunctions.iterateMapList(declaredFields, "declared Fields");
+                // UtilFunctions.iterateMapList(allFields, "All fields");
+                // UtilFunctions.iterateMapList(declaredMethods, "declared Methods");
+                // UtilFunctions.iterateMapList(allMethods, "All Methods");
+                // UtilFunctions.iterateMapSet(superTypes, "Super Types");
+                // UtilFunctions.iterateMapInt(subTypes, "Sub Types");
+
+                UtilFunctions.sortMapList(declaredFields);
+            } catch (Exception e) {
+                System.out.println(e);
             }
-
-        } catch (Exception e) {
-            System.out.println(e);
+        } else {
+            System.out.println("Provide 3 arguments, the input file, the output file and an integer.");
         }
 
     }

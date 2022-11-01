@@ -4,3 +4,7 @@ java.lang.Object
 java.lang.String
 java.lang.Double
 java.lang.Float
+java.lang.Number
+java.lang.Comparable
+java.lang.Appendable
+java.lang.CharSequence
