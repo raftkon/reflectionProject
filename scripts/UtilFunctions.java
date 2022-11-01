@@ -108,9 +108,7 @@ public class UtilFunctions {
 
     public static void sortMapList(Map<String, List<String>> map) {
         for (List<String> value : map.values()) {
-            System.out.println("BEFORE  " + value);
-            value.stream().sorted().collect(Collectors.toList());
-            System.out.println("AFTER  " + value);
+
         }
     }
 }
