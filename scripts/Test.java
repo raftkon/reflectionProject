@@ -29,7 +29,20 @@ public class Test {
                 // UtilFunctions.iterateMapSet(superTypes, "Super Types");
                 // UtilFunctions.iterateMapInt(subTypes, "Sub Types");
 
-                UtilFunctions.sortMapList(declaredFields);
+                // Map<String, Integer> declFMap = UtilFunctions.mapListToInt(declaredFields);
+                // Map<String, Integer> allFMap = UtilFunctions.mapListToInt(allFields);
+                // Map<String, Integer> declMMap = UtilFunctions.mapListToInt(declaredMethods);
+                // Map<String, Integer> allMMap = UtilFunctions.mapListToInt(allMethods);
+                // Map<String, Integer> superTypesMap = UtilFunctions.mapSetToInt(superTypes);
+
+                // System.out.println("DECLARED FIELDS" + declFMap);
+                // System.out.println("ALL FIELDS" + allFMap);
+                // System.out.println("DECLARED METHODS" + declMMap);
+                // System.out.println("ALL METHODS" + allMMap);
+                System.out.println("SUB TYPES" + subTypes);
+                // System.out.println("SUPER TYPES" + superTypesMap);
+                UtilFunctions.sortAndWriteMap(subTypes, args[1]);
+
             } catch (Exception e) {
                 System.out.println(e);
             }

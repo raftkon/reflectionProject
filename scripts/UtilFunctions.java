@@ -1,11 +1,12 @@
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class UtilFunctions {
     public static List<Class<?>> mapStringArrToClassArr(List<String> classNames) {
@@ -106,9 +107,50 @@ public class UtilFunctions {
         return map;
     }
 
-    public static void sortMapList(Map<String, List<String>> map) {
-        for (List<String> value : map.values()) {
+    public static Map<String, Integer> mapListToInt(Map<String, List<String>> map) {
+        Map<String, Integer> mapWithSizes = new HashMap<>();
+        for (Map.Entry<String, List<String>> entry : map.entrySet()) {
+            mapWithSizes.put(entry.getKey(), entry.getValue().size());
+        }
+        return mapWithSizes;
+    }
 
+    public static Map<String, Integer> mapSetToInt(Map<String, Set<String>> map) {
+        Map<String, Integer> mapWithSizes = new HashMap<>();
+        for (Map.Entry<String, Set<String>> entry : map.entrySet()) {
+            mapWithSizes.put(entry.getKey(), entry.getValue().size());
+        }
+        return mapWithSizes;
+
+    }
+
+    public static Object[] sortMap(Map<String, Integer> map, String filename) {
+        Object[] array = map.entrySet().toArray();
+        Arrays.sort(array, new Comparator() {
+            public int compare(Object o1, Object o2) {
+                return ((Map.Entry<String, Integer>) o2).getValue()
+                        .compareTo(((Map.Entry<String, Integer>) o1).getValue());
+            }
+        });
+        return array;
+
+    }
+
+    public static void prepareArrayForWriting(Object[] a, String filename) {
+        for (Object object : a) {
+            String toWrite = ((Map.Entry<String, Integer>) object).getKey() + " : "
+                    + ((Map.Entry<String, Integer>) object).getValue();
+            // System.out.println(toWrite);
+            IOScript.createFile(filename);
+            IOScript.writeToFile(filename, toWrite);
         }
     }
 }
+
+// for (Object object : a) {
+// String toWrite = ((Map.Entry<String, Integer>) object).getKey() + " : "
+// + ((Map.Entry<String, Integer>) object).getValue();
+// // System.out.println(toWrite);
+// IOScript.createFile(filename);
+// IOScript.writeToFile(filename, toWrite);
+// }

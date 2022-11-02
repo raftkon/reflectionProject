@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +45,33 @@ public class IOScript {
             writer.close();
         } catch (Exception e) {
             System.out.println("IOScript.writeFile Error: " + e);
+        }
+    }
+
+    public static void createFile(String filename) {
+        try {
+            File outputFile = new File(filename);
+            if (outputFile.createNewFile()) {
+                System.out.println("File created: " + outputFile.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (Exception e) {
+            System.out.println("An error occured.");
+            e.printStackTrace();
+        }
+    }
+
+    public static void writeToFile(String filename, String toWrite) {
+        try {
+
+            PrintWriter myWriter = new PrintWriter(new FileWriter(filename, true));
+            myWriter.append(toWrite + ", ");
+            myWriter.close();
+            System.out.println("Successfully wrote to the file: " + toWrite);
+        } catch (Exception e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
     }
 }
