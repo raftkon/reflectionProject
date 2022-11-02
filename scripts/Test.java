@@ -8,40 +8,44 @@ public class Test {
 
             try {
                 List<String> strArray = IOScript.readFile(args[0]);
-                List<Class<?>> classArray = UtilFunctions.mapStringArrToClassArr(strArray);
-                // * 1a
-                Map<String, List<String>> declaredFields = ReflectionScript.getDeclaredFieldsArr(classArray);
-                // * 1b
-                Map<String, List<String>> allFields = ReflectionScript.getAllFieldsArr(classArray);
-                // * 2a
-                Map<String, List<String>> declaredMethods = ReflectionScript.getDeclaredMethodsArr(classArray);
-                // * 2b
-                Map<String, List<String>> allMethods = ReflectionScript.getAllMethodsArr(classArray);
-                // * 4
-                Map<String, Set<String>> superTypes = ReflectionScript.getAllSuperTypes(classArray);
-                // * 3
-                Map<String, Integer> subTypes = ReflectionScript.getAllSubtypes(superTypes);
+                if (strArray.size() > Integer.parseInt(args[2])) {
 
-                // UtilFunctions.iterateMapList(declaredFields, "declared Fields");
-                // UtilFunctions.iterateMapList(allFields, "All fields");
-                // UtilFunctions.iterateMapList(declaredMethods, "declared Methods");
-                // UtilFunctions.iterateMapList(allMethods, "All Methods");
-                // UtilFunctions.iterateMapSet(superTypes, "Super Types");
-                // UtilFunctions.iterateMapInt(subTypes, "Sub Types");
+                    List<Class<?>> classArray = UtilFunctions.mapStringArrToClassArr(strArray);
+                    // * 1a
+                    Map<String, List<String>> declaredFields = ReflectionScript.getDeclaredFieldsArr(classArray);
+                    // * 1b
+                    Map<String, List<String>> allFields = ReflectionScript.getAllFieldsArr(classArray);
+                    // * 2a
+                    Map<String, List<String>> declaredMethods = ReflectionScript.getDeclaredMethodsArr(classArray);
+                    // * 2b
+                    Map<String, List<String>> allMethods = ReflectionScript.getAllMethodsArr(classArray);
+                    // * 4
+                    Map<String, Set<String>> superTypes = ReflectionScript.getAllSuperTypes(classArray);
+                    // * 3
+                    Map<String, Integer> subTypesMap = ReflectionScript.getAllSubtypes(superTypes);
 
-                // Map<String, Integer> declFMap = UtilFunctions.mapListToInt(declaredFields);
-                // Map<String, Integer> allFMap = UtilFunctions.mapListToInt(allFields);
-                // Map<String, Integer> declMMap = UtilFunctions.mapListToInt(declaredMethods);
-                // Map<String, Integer> allMMap = UtilFunctions.mapListToInt(allMethods);
-                // Map<String, Integer> superTypesMap = UtilFunctions.mapSetToInt(superTypes);
+                    Map<String, Integer> declFieldsMap = UtilFunctions.mapListToInt(declaredFields);
+                    Map<String, Integer> allFieldsMap = UtilFunctions.mapListToInt(allFields);
+                    Map<String, Integer> declMethodsMap = UtilFunctions.mapListToInt(declaredMethods);
+                    Map<String, Integer> allMethodsMap = UtilFunctions.mapListToInt(allMethods);
+                    Map<String, Integer> superTypesMap = UtilFunctions.mapSetToInt(superTypes);
 
-                // System.out.println("DECLARED FIELDS" + declFMap);
-                // System.out.println("ALL FIELDS" + allFMap);
-                // System.out.println("DECLARED METHODS" + declMMap);
-                // System.out.println("ALL METHODS" + allMMap);
-                System.out.println("SUB TYPES" + subTypes);
-                // System.out.println("SUPER TYPES" + superTypesMap);
-                UtilFunctions.sortAndWriteMap(subTypes, args[1]);
+                    Object[] declFieldsObject = UtilFunctions.mapToSortedArray(declFieldsMap);
+                    Object[] allFieldsObject = UtilFunctions.mapToSortedArray(allFieldsMap);
+                    Object[] declMethodsObject = UtilFunctions.mapToSortedArray(declMethodsMap);
+                    Object[] allMethodsObject = UtilFunctions.mapToSortedArray(allMethodsMap);
+                    Object[] subTypesObject = UtilFunctions.mapToSortedArray(subTypesMap);
+                    Object[] superTypesObject = UtilFunctions.mapToSortedArray(superTypesMap);
+
+                    UtilFunctions.mutateAndWriteArray(declFieldsObject, args[1], Integer.parseInt(args[2]), "1a");
+                    UtilFunctions.mutateAndWriteArray(allFieldsObject, args[1], Integer.parseInt(args[2]), "1b");
+                    UtilFunctions.mutateAndWriteArray(declMethodsObject, args[1], Integer.parseInt(args[2]), "2a");
+                    UtilFunctions.mutateAndWriteArray(allMethodsObject, args[1], Integer.parseInt(args[2]), "2b");
+                    UtilFunctions.mutateAndWriteArray(subTypesObject, args[1], Integer.parseInt(args[2]), "3");
+                    UtilFunctions.mutateAndWriteArray(superTypesObject, args[1], Integer.parseInt(args[2]), "4");
+                } else {
+                    System.out.println("N must be smaller than the number of classes. Provide a smaller number");
+                }
 
             } catch (Exception e) {
                 System.out.println(e);

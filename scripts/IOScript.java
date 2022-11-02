@@ -33,21 +33,6 @@ public class IOScript {
 
     }
 
-    public static void writeFile(String filename) {
-        List<String> strArr = new ArrayList<>();
-        try {
-
-            FileWriter writer = new FileWriter(filename);
-            for (String string : strArr) {
-                writer.write(string);
-                writer.write("\n");
-            }
-            writer.close();
-        } catch (Exception e) {
-            System.out.println("IOScript.writeFile Error: " + e);
-        }
-    }
-
     public static void createFile(String filename) {
         try {
             File outputFile = new File(filename);
@@ -66,7 +51,7 @@ public class IOScript {
         try {
 
             PrintWriter myWriter = new PrintWriter(new FileWriter(filename, true));
-            myWriter.append(toWrite + ", ");
+            myWriter.append(toWrite + "\n");
             myWriter.close();
             System.out.println("Successfully wrote to the file: " + toWrite);
         } catch (Exception e) {

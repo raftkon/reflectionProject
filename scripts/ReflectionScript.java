@@ -79,4 +79,31 @@ public class ReflectionScript {
         return map;
     }
 
+    public static List<Object[]> groupAnswersToList(List<Class<?>> classArray) {
+        Map<String, Integer> declFieldsMap = UtilFunctions
+                .mapListToInt(ReflectionScript.getDeclaredFieldsArr(classArray));
+        Map<String, Integer> allFieldsMap = UtilFunctions.mapListToInt(ReflectionScript.getAllFieldsArr(classArray));
+        Map<String, Integer> declMethodsMap = UtilFunctions
+                .mapListToInt(ReflectionScript.getDeclaredMethodsArr(classArray));
+        Map<String, Integer> allMethodsMap = UtilFunctions.mapListToInt(ReflectionScript.getAllMethodsArr(classArray));
+        Map<String, Integer> superTypesMap = UtilFunctions.mapSetToInt(ReflectionScript.getAllSuperTypes(classArray));
+        Map<String, Integer> subTypesMap = ReflectionScript
+                .getAllSubtypes(ReflectionScript.getAllSuperTypes(classArray));
+
+        Object[] declFieldsObject = UtilFunctions.mapToSortedArray(declFieldsMap);
+        Object[] allFieldsObject = UtilFunctions.mapToSortedArray(allFieldsMap);
+        Object[] declMethodsObject = UtilFunctions.mapToSortedArray(declMethodsMap);
+        Object[] allMethodsObject = UtilFunctions.mapToSortedArray(allMethodsMap);
+        Object[] subTypesObject = UtilFunctions.mapToSortedArray(subTypesMap);
+        Object[] superTypesObject = UtilFunctions.mapToSortedArray(superTypesMap);
+
+        List<Object[]> answers = new ArrayList<>();
+        answers.add(declFieldsObject);
+        answers.add(allFieldsObject);
+        answers.add(declMethodsObject);
+        answers.add(allMethodsObject);
+        answers.add(subTypesObject);
+        answers.add(superTypesObject);
+        return answers;
+    }
 }

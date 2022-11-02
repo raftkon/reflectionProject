@@ -124,7 +124,7 @@ public class UtilFunctions {
 
     }
 
-    public static Object[] sortMap(Map<String, Integer> map, String filename) {
+    public static Object[] mapToSortedArray(Map<String, Integer> map) {
         Object[] array = map.entrySet().toArray();
         Arrays.sort(array, new Comparator() {
             public int compare(Object o1, Object o2) {
@@ -136,21 +136,30 @@ public class UtilFunctions {
 
     }
 
-    public static void prepareArrayForWriting(Object[] a, String filename) {
-        for (Object object : a) {
-            String toWrite = ((Map.Entry<String, Integer>) object).getKey() + " : "
-                    + ((Map.Entry<String, Integer>) object).getValue();
-            // System.out.println(toWrite);
-            IOScript.createFile(filename);
-            IOScript.writeToFile(filename, toWrite);
+    public static void mutateAndWriteArray(Object[] object, String filename, int N, String exerNum) {
+        String toWrite = "";
+        for (int i = 0; i < N; i++) {
+            if (i == 0) {
+                toWrite += exerNum + ": " + ((Map.Entry<String, Integer>) object[i]).getKey() + ", ";
+            } else if (i == N - 1) {
+
+                toWrite += ((Map.Entry<String, Integer>) object[i]).getKey();
+            } else {
+                toWrite += ((Map.Entry<String, Integer>) object[i]).getKey() + ", ";
+
+            }
         }
+
+        IOScript.createFile(filename);
+        IOScript.writeToFile(filename, toWrite);
+    }
+
+    public static void writeListToFile(List<Object[]> answersList, String outputFile, int N) {
+        UtilFunctions.mutateAndWriteArray(answersList.get(0), outputFile, N, "1a");
+        UtilFunctions.mutateAndWriteArray(answersList.get(1), outputFile, N, "1b");
+        UtilFunctions.mutateAndWriteArray(answersList.get(2), outputFile, N, "2a");
+        UtilFunctions.mutateAndWriteArray(answersList.get(3), outputFile, N, "2b");
+        UtilFunctions.mutateAndWriteArray(answersList.get(4), outputFile, N, "3");
+        UtilFunctions.mutateAndWriteArray(answersList.get(5), outputFile, N, "4");
     }
 }
-
-// for (Object object : a) {
-// String toWrite = ((Map.Entry<String, Integer>) object).getKey() + " : "
-// + ((Map.Entry<String, Integer>) object).getValue();
-// // System.out.println(toWrite);
-// IOScript.createFile(filename);
-// IOScript.writeToFile(filename, toWrite);
-// }
