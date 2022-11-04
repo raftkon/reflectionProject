@@ -6,9 +6,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * IOScript
- */
 public class IOScript {
 
     public static List<String> readFile(String filename) {

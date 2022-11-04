@@ -7,11 +7,12 @@ public class Main {
                 String inputFile = args[0];
                 String outputFile = args[1];
                 int N = Integer.parseInt(args[2]);
+
                 List<String> strArray = IOScript.readFile(inputFile);
                 if (strArray.size() > N) {
-                    List<Class<?>> classArray = UtilFunctions.mapStringArrToClassArr(strArray);
-                    List<Object[]> answersList = ReflectionScript.groupAnswersToList(classArray);
-                    UtilFunctions.writeListToFile(answersList, outputFile, N);
+                    List<Class<?>> classArray = Utilities.mapStringArrToClassArr(strArray);
+                    List<Object[]> answersList = Utilities.groupAnswersToList(classArray);
+                    Utilities.writeListToFile(answersList, outputFile, N);
                 } else {
                     System.out.println("N must be smaller than the number of classes. Provide a smaller number");
                 }
