@@ -10,6 +10,6 @@ The script requires the invoker to provide:
 
 ## Notes
 After compiling all .java files, run the command below: 
-* java -cp <\classpath> Main <\input file> <\output file> <\top-N>
+* java -cp (classpath) Main (input file) (output file) (top-N)
 
 In case the script throws error about not finding the Main class, try to rearrange the classpaths and the error will be resolved.
