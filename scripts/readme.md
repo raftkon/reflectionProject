@@ -8,8 +8,8 @@ The script requires the invoker to provide:
 * the top-N results.
 #### The invoker is responsible for providing the right classpath. 
 
-## After compiling all .java files, run the command below: 
-* java -cp (classpath) Main (input file) (output file) (top-N)
+## Notes
+After compiling all .java files, run the command below: 
+* java -cp <\classpath> Main <\input file> <\output file> <\top-N>
 
-## Note
-* In case the script throws error about not finding the Main class, try to rearrange the classpaths and the error will be resolved.
+In case the script throws error about not finding the Main class, try to rearrange the classpaths and the error will be resolved.
