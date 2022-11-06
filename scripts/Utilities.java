@@ -36,7 +36,6 @@ public class Utilities {
             mapWithSizes.put(entry.getKey(), entry.getValue().size());
         }
         return mapWithSizes;
-
     }
 
     @SuppressWarnings("unchecked")
@@ -49,28 +48,26 @@ public class Utilities {
             }
         });
         return array;
-
     }
 
     @SuppressWarnings("unchecked")
-    public static void mutateAndWriteList(Object[] object, String filename, int N, String exerNum) {
+    public static void mutateAndWriteList(Object[] object, String filename, int N, String exerciseNum) {
         String toWrite = "";
         for (int i = 0; i < N; i++) {
             if (i == 0) {
-                toWrite += exerNum + ": " + ((Map.Entry<String, Integer>) object[i]).getKey() + ", ";
-            } else if (i == N - 1) {
-
-                toWrite += ((Map.Entry<String, Integer>) object[i]).getKey();
+                toWrite += exerciseNum + ": " + ((Map.Entry<String, Integer>) object[i]).getKey();
+            } else if (((Map.Entry<String, Integer>) object[i]).getValue() == 0) {
+                continue;
             } else {
-                toWrite += ((Map.Entry<String, Integer>) object[i]).getKey() + ", ";
-
+                toWrite += ", " + ((Map.Entry<String, Integer>) object[i]).getKey();
             }
         }
-        IOScript.createFile(filename);
         IOScript.writeToFile(filename, toWrite);
     }
 
     public static void writeListToFile(List<Object[]> answersList, String outputFile, int N) {
+        IOScript.createFile(outputFile);
+
         Utilities.mutateAndWriteList(answersList.get(0), outputFile, N, "1a");
         Utilities.mutateAndWriteList(answersList.get(1), outputFile, N, "1b");
         Utilities.mutateAndWriteList(answersList.get(2), outputFile, N, "2a");
@@ -99,9 +96,7 @@ public class Utilities {
 
         for (Map<String, Integer> map : groupedMaps) {
             answers.add(Utilities.mapToSortedArray(map));
-
         }
         return answers;
     }
-
 }

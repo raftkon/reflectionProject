@@ -11,8 +11,8 @@ public class IOScript {
     public static List<String> readFile(String filename) {
         List<String> strArr = new ArrayList<>();
         try {
-            FileReader fr = new FileReader(filename); // Anoigei arxeio
-            BufferedReader br = new BufferedReader(fr); // Diavazei arxeio
+            FileReader fr = new FileReader(filename);
+            BufferedReader br = new BufferedReader(fr);
             String str = br.readLine();
 
             while (str != null) {
@@ -33,13 +33,14 @@ public class IOScript {
     public static void createFile(String filename) {
         try {
             File outputFile = new File(filename);
+            outputFile.delete();
             if (outputFile.createNewFile()) {
                 System.out.println("File created: " + outputFile.getName());
             } else {
                 System.out.println("File already exists.");
             }
         } catch (Exception e) {
-            System.out.println("An error occured.");
+            System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }

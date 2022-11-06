@@ -16,6 +16,7 @@ public class Reflection {
             Field[] declFields = c.getDeclaredFields();
             mapDeclFields = Populate.populateDeclaredFields(declFields, mapDeclFields, c);
         }
+
         return mapDeclFields;
     }
 
@@ -29,6 +30,7 @@ public class Reflection {
                 d = d.getSuperclass();
             }
         }
+
         return map;
     }
 
@@ -40,6 +42,7 @@ public class Reflection {
             Method[] declaredMethods = c.getDeclaredMethods();
             mapDeclaredMethods = Populate.populateMethods(declaredMethods, mapDeclaredMethods, c);
         }
+
         return mapDeclaredMethods;
     }
 
@@ -75,7 +78,6 @@ public class Reflection {
             }
             map.put(typename, counter);
         }
-
         return map;
     }
 }
